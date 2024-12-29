@@ -1,0 +1,38 @@
+part of '../auth_imports.dart';
+
+class CustomTextField extends StatefulWidget {
+  final String label;
+  late bool isObscure = false;
+  late bool isSecrect;
+  final String? Function(String?)? validator;
+   CustomTextField({super.key, required this.label, this.isSecrect = false, this.validator});
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding:  EdgeInsets.only(bottom: 20.0),
+      child: TextFormField(
+          obscureText: widget.isObscure,
+          validator: widget.validator,
+        decoration: InputDecoration(
+          isDense: true,
+           labelText: widget.label,  
+           suffixIcon: widget.isSecrect ? IconButton(
+            onPressed: (){
+              setState(() {
+            widget.isObscure =  !widget.isObscure;
+              });
+           }, icon: Icon(Icons.visibility_off) ): null,
+            border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      ),
+    );
+  }
+}
