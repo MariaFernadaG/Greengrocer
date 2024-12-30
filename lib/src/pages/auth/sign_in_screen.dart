@@ -3,7 +3,8 @@ part of 'auth_imports.dart';
 class SignInScreen extends StatelessWidget {
    SignInScreen({super.key});
   final _formKey = GlobalKey<FormState>();
-
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +71,7 @@ class SignInScreen extends StatelessWidget {
                     children: [
                     
                    CustomTextField(label: 'Email',
+                   controller: emailController,
                     validator: (email){
                           if (email == null || email.isEmpty) return 'Digite seu email';
                           if(!email.isEmail) return 'Email inválido';
@@ -80,6 +82,7 @@ class SignInScreen extends StatelessWidget {
                     
                       CustomTextField(
                         label: 'Senha',
+                        controller: passwordController,
                         isSecrect: true,
                         validator: (password) {
                           if (password == null || password.isEmpty) 
@@ -113,6 +116,10 @@ class SignInScreen extends StatelessWidget {
                           ),
                           onPressed: () {
 _formKey.currentState!.validate();
+String email = emailController.text;
+String password = passwordController.text;
+print(email);
+print(password);
                           },
                           child: const Text(
                             'Entrar',
